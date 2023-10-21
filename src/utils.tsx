@@ -1,6 +1,7 @@
 // import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { CityData, CityDataList } from "./Types/utils-types";
+import { useMemo } from "react";
 // import { DutchCityFetchData } from './types/utils-types';
 
 // Constants
@@ -43,16 +44,21 @@ const fetchDutchCities = async () => {
 // Custom hook using react-query
 export const useFetchDutchCities = (): CityDataList => {
   let cities: CityData[] = [];
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["getDutchCitiesQuery"],
     queryFn: () => fetchDutchCities(),
   });
-  if (!isLoading && !isError && data) {
-    cities = data?.map((element) => ({
-      city: element?.city,
-      province: element?.admin_name,
-      population: element?.population,
-    }));
-  }
+
+  cities = useMemo(() => {
+    if (data) {
+      return data.map((element) => ({
+        city: element?.city,
+        province: element?.admin_name,
+        population: element?.population,
+      }));
+    }
+  }, [data]);
+
   return { cities, isLoading, isError };
 };

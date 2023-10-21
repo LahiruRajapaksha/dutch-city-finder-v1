@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Box from "@mui/material/Box";
+import CityCard from "./components/Card/Card";
+import { useFetchDutchCities } from "./utils";
+import Typography from "@mui/material/Typography";
+import SearchBar from "./components/Search/Search";
+import { useState, useEffect } from "react";
+import { CityData } from "./Types/utils-types";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { cities, isLoading, isError } = useFetchDutchCities();
+  const [searchCities, setSearchCities] = useState<CityData[]>(cities);
 
+  useEffect(() => {
+    setSearchCities(cities);
+  }, [cities]);
+
+  const handleSearchCities = (cityName: string) => {
+    setSearchCities(
+      cities?.filter((cityData) => cityData.city.includes(cityName))
+    );
+  };
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Typography variant="h1">Dutch Cities</Typography>
+        </Box>
+        <SearchBar handleSearchCities={handleSearchCities} />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {searchCities?.map((city) => (
+          <CityCard
+            key={city.city}
+            city={city.city}
+            province={city.province}
+            population={city.population}
+          />
+        ))}
+      </Box>
+    </Box>
+  );
 }
 
-export default App
+export default App;
