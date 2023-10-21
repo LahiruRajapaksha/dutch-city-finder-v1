@@ -1,45 +1,24 @@
-// import axios from "axios";
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { CityData, CityDataList } from "./Types/utils-types";
+import { CityData, CityDataList, ResponseData } from "./Types/utils-types";
 import { useMemo } from "react";
-// import { DutchCityFetchData } from './types/utils-types';
 
 // Constants
-export const BASE_URL = "https://simplemaps.com";
+export const BASE_URL = "http://localhost:5173";
 
 // Create an axios client
-// const axiosClient = axios.create({
-//   baseURL: BASE_URL,
-// });
+const axiosClient = axios.create({
+  baseURL: BASE_URL,
+});
 
 // Data fetching function
-const fetchDutchCities = async () => {
-  try {
-    const response = await fetch("/static/data/country-cities/nl/nl.json", {
-      headers: {
-        "Content-Type": "application/json",
-      },
+const fetchDutchCities = () =>
+  axiosClient
+    .get("/static/data/country-cities/nl/nl.json")
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error(error);
     });
-    const cityData = await response.json();
-    return cityData;
-  } catch (error) {
-    console.error(error);
-  }
-
-  // axiosClient
-  //   .get("/static/data/country-cities/nl/nl.json", {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Acess-Control-Allow-Origin": "*",
-  //     },
-  //   })
-  //   .then((response) => {
-  //     console.log(response);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-};
 
 // Custom hook using react-query
 export const useFetchDutchCities = (): CityDataList => {
@@ -52,7 +31,7 @@ export const useFetchDutchCities = (): CityDataList => {
 
   cities = useMemo(() => {
     if (data) {
-      return data.map((element) => ({
+      return data.map((element: ResponseData) => ({
         city: element?.city,
         province: element?.admin_name,
         population: element?.population,

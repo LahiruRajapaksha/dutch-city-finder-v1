@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import SearchBar from "./components/Search/Search";
 import { useState, useEffect } from "react";
 import { CityData } from "./Types/utils-types";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -45,14 +46,16 @@ function App() {
           flexWrap: "wrap",
         }}
       >
-        {searchCities?.map((city) => (
-          <CityCard
-            key={city.city}
-            city={city.city}
-            province={city.province}
-            population={city.population}
-          />
-        ))}
+        {isLoading && <CircularProgress />}
+        {!isLoading &&
+          searchCities?.map((city) => (
+            <CityCard
+              key={city.city}
+              city={city.city}
+              province={city.province}
+              population={city.population}
+            />
+          ))}
       </Box>
     </Box>
   );
