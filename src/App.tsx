@@ -28,7 +28,7 @@ function App() {
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#f3f3f3",
-        height: "100vh",
+        height: "100%",
         boxSizing: "border-box",
       }}
     >
