@@ -21,8 +21,7 @@ const CityCard = (props: CityCardProps) => {
   return (
     <CityCard>
       <CityCardContent>
-        {/* <CardHeader title={city} /> */}
-        <Typography>{city}</Typography>
+        <Typography variant="h6">{city}</Typography>
         <Typography>{`Province:${province}`}</Typography>
         <Typography>{`Population:${population}`}</Typography>
       </CityCardContent>
