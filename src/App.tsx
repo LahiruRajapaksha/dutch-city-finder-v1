@@ -27,8 +27,6 @@ function App() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#f3f3f3",
-        height: "100%",
         boxSizing: "border-box",
       }}
     >
@@ -56,11 +54,12 @@ function App() {
           justifyContent: "center",
           alignItems: "center",
           flexWrap: "wrap",
-          overflow: "auto",
+          // overflow: "auto",
+          flexGrow: 1,
         }}
       >
         {isLoading && (
-          <Box mt={5} height={100}>
+          <Box mt={5}>
             <CircularProgress />
           </Box>
         )}

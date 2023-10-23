@@ -8,7 +8,7 @@ const CityCard = (props: CityCardProps) => {
   const { city, province, population } = props;
 
   const CityCard = styled(Card)<CardProps>(() => ({
-    height: 100,
+    height: "100",
     width: "20%",
     margin: 10,
   }));
@@ -16,6 +16,7 @@ const CityCard = (props: CityCardProps) => {
   const CityCardContent = styled(CardContent)<CardProps>(() => ({
     height: 50,
     width: "100%",
+    margin: 5,
   }));
 
   return (
