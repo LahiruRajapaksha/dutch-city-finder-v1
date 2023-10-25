@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { CityData, CityDataList, ResponseData } from "./Types/utils-types";
+import { CityData, CityDataList, ResponseData } from "./types/utils-types";
 import { useMemo } from "react";
 
 // Constants

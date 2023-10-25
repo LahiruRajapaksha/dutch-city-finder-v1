@@ -1,5 +1,5 @@
 import { Card, CardContent, CardProps, Typography } from "@mui/material";
-import { CityData } from "../../Types/utils-types";
+import { CityData } from "../../types/utils-types";
 import { styled } from "@mui/material/styles";
 import { useEffect, useRef } from "react";
 import { useFetchDutchCities } from "../../utils";
