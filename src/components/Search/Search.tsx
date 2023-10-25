@@ -1,6 +1,6 @@
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
+import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useEffect, useRef } from "react";
@@ -8,7 +8,7 @@ interface SearchBarProps {
   handleSearchCities: (cityName: string) => void;
 }
 
-const CustomTextField = styled(TextField)<TextFieldProps>({
+const CustomTextField = styled(TextField)({
   width: "30%",
   "& .MuiOutlinedInput-root": {
     "&:hover fieldset": {

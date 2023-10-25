@@ -6,7 +6,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const CityCard = lazy(() => import("./components/Card/Card"));
+  const CityCardList = lazy(() => import("./components/CardList/CardList"));
 
   const handleSearchCities = (cityName: string) => {
     setSearchTerm(cityName);
@@ -28,7 +28,7 @@ function App() {
         overflow="auto"
       >
         <Suspense fallback={<CircularProgress />}>
-          <CityCard searchTerm={searchTerm} />
+          <CityCardList searchTerm={searchTerm} />
         </Suspense>
       </Box>
     </Box>

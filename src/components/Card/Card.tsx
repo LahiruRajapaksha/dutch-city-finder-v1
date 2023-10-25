@@ -1,69 +1,40 @@
 import { Card, CardContent, CardProps, Typography } from "@mui/material";
-import { CityData } from "../../types/utils-types";
 import { styled } from "@mui/material/styles";
-import { useEffect, useRef } from "react";
-import { useFetchDutchCities } from "../../utils";
-import "./Card.css";
+import { forwardRef } from "react";
+
 interface CityCardProps {
-  searchTerm: string;
+  city: string;
+  province: string;
+  population: string;
+  isVisible?: boolean;
 }
 
-const CityCard = (props: CityCardProps) => {
-  const { searchTerm } = props;
-  const { cities } = useFetchDutchCities();
-  const cardRef = useRef<HTMLDivElement[]>([]);
+interface CityCardContainerStyleProps extends CardProps {
+  isVisible?: boolean;
+}
+const CityCardContainer = styled(Card)<CityCardContainerStyleProps>(() => ({
+  width: "20%",
+  height: "20%",
+  margin: 10,
+  opacity: 0,
+}));
 
-  const CityCard = styled(Card)<CardProps>(() => ({
-    width: "20%",
-    height: "20%",
-    margin: 10,
-    opacity: 0,
-  }));
+const CityCardContent = styled(CardContent)(() => ({
+  height: 50,
+  margin: 5,
+}));
 
-  const CityCardContent = styled(CardContent)<CardProps>(() => ({
-    height: 50,
-    margin: 5,
-  }));
-
-  useEffect(() => {
-    const cardObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("card-show");
-            cardObserver.unobserve(entry.target);
-          } else {
-            entry.target.classList.remove("card-show");
-          }
-        });
-      },
-      { threshold: 0.5, rootMargin: "-200px" }
-    );
-    if (cardRef.current)
-      cardRef.current.forEach((ref) => cardObserver.observe(ref));
-  }, [cardRef, cities]);
-
-  return cities
-    ?.filter((cityData) =>
-      cityData.city.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .map((city: CityData, index: number) => (
-      <CityCard
-        ref={(e) => (cardRef.current[index] = e!)}
-        key={city.city}
-        className={`card ${
-          city.city.toLowerCase().includes(searchTerm.toLowerCase())
-            ? "card-show"
-            : ""
-        }`}
-      >
-        <CityCardContent>
-          <Typography variant="h6">{city.city}</Typography>
-          <Typography>{`Province: ${city.province}`}</Typography>
-          <Typography>{`Population: ${city.population}`}</Typography>
-        </CityCardContent>
-      </CityCard>
-    ));
-};
+const CityCard = forwardRef<HTMLDivElement, CityCardProps>((props, ref) => {
+  const { city, province, population } = props;
+  return (
+    <CityCardContainer ref={ref}>
+      <CityCardContent>
+        <Typography variant="h6">{city}</Typography>
+        <Typography>{`Province: ${province}`}</Typography>
+        <Typography>{`Population: ${population}`}</Typography>
+      </CityCardContent>
+    </CityCardContainer>
+  );
+});
 
 export default CityCard;
