@@ -22,9 +22,10 @@ function App() {
       <Box
         display="flex"
         justifyContent="center"
-        alignItems="center"
         flexWrap="wrap"
         flexGrow={1}
+        height={600}
+        overflow="auto"
       >
         <Suspense fallback={<CircularProgress />}>
           <CityCard searchTerm={searchTerm} />

@@ -15,6 +15,7 @@ const CityCard = (props: CityCardProps) => {
 
   const CityCard = styled(Card)<CardProps>(() => ({
     width: "20%",
+    height: "20%",
     margin: 10,
     opacity: 0,
   }));
@@ -36,7 +37,7 @@ const CityCard = (props: CityCardProps) => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5, rootMargin: "-200px" }
     );
     if (cardRef.current)
       cardRef.current.forEach((ref) => cardObserver.observe(ref));
