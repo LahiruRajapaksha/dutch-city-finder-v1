@@ -12,9 +12,11 @@ const axiosClient = axios.create({
 });
 
 // Data fetching function
-const fetchDutchCities = () =>
+// If we need to abort the api call we need to pass the signal 
+// object to the query function
+const fetchDutchCities = (signal?: AbortSignal) =>
   axiosClient
-    .get("/static/data/country-cities/nl/nl.json")
+    .get("/static/data/country-cities/nl/nl.json", { signal })
     .then((response) => response.data)
     .catch((error) => {
       console.error(error);
