@@ -3,3 +3,6 @@
     opacity: 1;
     transform: scale(1);
 }
+.cardHide {
+    opacity: 0;
+}

@@ -16,7 +16,6 @@ const CityCardContainer = styled(Card)<CityCardContainerStyleProps>(() => ({
   width: "20%",
   height: "20%",
   margin: 10,
-  opacity: 0,
 }));
 
 const CityCardContent = styled(CardContent)(() => ({

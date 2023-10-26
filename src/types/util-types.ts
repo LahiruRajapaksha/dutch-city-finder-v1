@@ -13,10 +13,10 @@ export interface ResponseData {
 export interface CityData {
     city: string;
     province: string;
-    population:string;
+    population: string;
 }
 
-export interface CityDataList { 
+export interface CityDataList {
     cities: CityData[];
     isLoading: boolean;
     isError: boolean;
