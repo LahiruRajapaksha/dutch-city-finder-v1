@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { CityData, CityDataList, ResponseData } from "./types/utils-types";
+import { CityData, CityDataList, ResponseData } from "../types/utils-types";
 import { useMemo } from "react";
 
 // Constants
@@ -12,7 +12,7 @@ const axiosClient = axios.create({
 });
 
 // Data fetching function
-// If we need to abort the api call we need to pass the signal 
+// If we need to abort the api call we need to pass the signal
 // object to the query function
 const fetchDutchCities = (signal?: AbortSignal) =>
   axiosClient
@@ -26,7 +26,7 @@ const fetchDutchCities = (signal?: AbortSignal) =>
 export const useFetchDutchCities = (): CityDataList => {
   let cities: CityData[] = [];
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["getDutchCitiesQuery"],
     queryFn: () => fetchDutchCities(),
   });
@@ -41,5 +41,5 @@ export const useFetchDutchCities = (): CityDataList => {
     }
   }, [data]);
 
-  return { cities, isLoading, isError };
+  return { cities, isLoading, isError, refetch };
 };

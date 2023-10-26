@@ -20,4 +20,5 @@ export interface CityDataList {
     cities: CityData[];
     isLoading: boolean;
     isError: boolean;
+    refetch: () => void;
 }
