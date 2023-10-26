@@ -24,7 +24,6 @@ const CityCardList = (props: CityCardProps) => {
           if (entry.isIntersecting) {
             entry.target.classList.remove("cardHide");
             entry.target.classList.add("cardShow");
-            // cardObserver.unobserve(entry.target);
           }
         });
       },
