@@ -5,7 +5,7 @@ import { useMemo } from "react";
 
 // Constants
 export const BASE_URL = "http://localhost:5173";
-// export const BASE_URL = "https://simplemaps.com";
+
 
 // Create an axios client
 const axiosClient = axios.create({
